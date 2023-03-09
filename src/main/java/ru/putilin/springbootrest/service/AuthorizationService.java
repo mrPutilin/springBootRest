@@ -2,16 +2,20 @@ package ru.putilin.springbootrest.service;
 
 import org.springframework.stereotype.Service;
 import ru.putilin.springbootrest.Authorities;
-import ru.putilin.springbootrest.InvalidCredentials;
+import ru.putilin.springbootrest.advice.InvalidCredentials;
 import ru.putilin.springbootrest.repository.UserRepository;
-import ru.putilin.springbootrest.UnauthorizedUser;
+import ru.putilin.springbootrest.advice.UnauthorizedUser;
 
 import java.util.List;
 
 @Service
 public class AuthorizationService {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public AuthorizationService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<Authorities> getAuthorities(String user, String password) {
         if (isEmpty(user) || isEmpty(password)) {

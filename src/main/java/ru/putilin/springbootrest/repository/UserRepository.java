@@ -15,7 +15,7 @@ public class UserRepository {
     }
 
     public List<Authorities> getUserAuthorities(String user, String password) {
-        authorities.add(Authorities.DELETE);
+//        authorities.add(Authorities.DELETE);
         return authorities;
 
     }
