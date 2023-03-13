@@ -1,8 +1,8 @@
 package ru.putilin.springbootrest.service;
 
 import org.springframework.stereotype.Service;
-import ru.putilin.springbootrest.Authorities;
-import ru.putilin.springbootrest.advice.InvalidCredentials;
+import ru.putilin.springbootrest.model.Authorities;
+import ru.putilin.springbootrest.model.User;
 import ru.putilin.springbootrest.repository.UserRepository;
 import ru.putilin.springbootrest.advice.UnauthorizedUser;
 
@@ -17,19 +17,13 @@ public class AuthorizationService {
         this.userRepository = userRepository;
     }
 
-    public List<Authorities> getAuthorities(String user, String password) {
-        if (isEmpty(user) || isEmpty(password)) {
-            throw new InvalidCredentials("User name or password is empty");
-        }
-        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
+    public List<Authorities> getAuthorities(User user) {
+        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user);
+
         if (isEmpty(userAuthorities)) {
-            throw new UnauthorizedUser("Unknown user " + user);
+            throw new UnauthorizedUser("Unknown user " + user.getUser() + " " + user.getPassword());
         }
         return userAuthorities;
-    }
-
-    private boolean isEmpty(String str) {
-        return str == null || str.isEmpty();
     }
 
     private boolean isEmpty(List<?> str) {

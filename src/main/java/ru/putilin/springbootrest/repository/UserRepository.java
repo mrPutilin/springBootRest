@@ -1,7 +1,8 @@
 package ru.putilin.springbootrest.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.putilin.springbootrest.Authorities;
+import ru.putilin.springbootrest.model.Authorities;
+import ru.putilin.springbootrest.model.User;
 
 import java.util.List;
 
@@ -14,8 +15,8 @@ public class UserRepository {
         this.authorities = authorities;
     }
 
-    public List<Authorities> getUserAuthorities(String user, String password) {
-//        authorities.add(Authorities.DELETE);
+    public List<Authorities> getUserAuthorities(User user) {
+        authorities.add(Authorities.DELETE);
         return authorities;
 
     }
