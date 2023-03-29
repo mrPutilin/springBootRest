@@ -1,0 +1,9 @@
+version: '1'
+
+services:
+  app1:
+    build: .
+    image: my-springboot
+    ports:
+      - 8081:8080
+    container_name: super-container
